@@ -85,20 +85,24 @@
 			</div>
 		</div>
 	</div>
-	<div class='container'>
+	<div class='container first-row'>
 		<button class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#new-worker-modal'><i class="fa fa-plus-circle"></i></button>
 		<label class="">Add New Employee</label>
-		<div class="container well">
-			<div class="card col-xs-12 col-sm-6 col-md-3" ng-repeat="worker in workers track by $index">
-				<img width=100 class="card-img-top" ng-src="{{worker.photourl}}">
-				<div class="card-block">
-					<h4 class="card-title">{{worker.fname}} {{worker.lname}}</h4>
-					<div ng-show='worker.nickname' class="card-text">a.k.a., "{{worker.nickname}}"</div>
-					<button ng-click='editWorker(worker)' class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#edit-worker-modal'><i class="fa fa-info-circle"></i></button>
-					<button class='btn btn-sm btn-danger delete' ng-click='confirmDelete(worker)'><i class="fa fa-trash"></i></button>
-				</div>
+		<span id="filterbox"><input class="form-control" size=30 placeholder="Search Employees..." ng-model='filterText'></span>
+	</div>
+
+	<div class="container well" >
+		<div class="card col-xs-12 col-sm-6 col-md-3"
+		ng-repeat="worker in workers | filter:filterText track by $index">
+			<img width=100 class="card-img-top" ng-src="{{worker.photourl}}">
+			<div class="card-block">
+				<h4 class="card-title">{{worker.fname}} {{worker.lname}}</h4>
+				<div ng-show='worker.nickname' class="card-text">a.k.a., "{{worker.nickname}}"</div>
+				<button ng-click='editWorker(worker)' class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#edit-worker-modal'><i class="fa fa-info-circle"></i></button>
+				<button class='btn btn-sm btn-danger delete' ng-click='confirmDelete(worker)'><i class="fa fa-trash"></i></button>
 			</div>
 		</div>
+	</div>
 </body>
 
 </html>
