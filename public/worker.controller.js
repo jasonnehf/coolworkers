@@ -79,7 +79,7 @@ app.controller('workerCtrl', function($scope, WorkerFactory) {
 			text: "Are you sure you want to edit this co-worker?",
 			type: "warning",
 			showCancelButton: true,
-			confirmButtonColor: "red",
+			confirmButtonColor: "blue",
 			confirmButtonText: "Yarp.",
 			cancelButtonText: "...Narp?",
 			closeOnConfirm: false,
