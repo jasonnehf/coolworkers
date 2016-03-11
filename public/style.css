@@ -1,0 +1,19 @@
+strike, .jumbo-gray {
+	color:#444;
+	font-size:100%;
+}
+.jumbotron {
+	box-shadow:0px 2px 20px 20px #232123;
+}
+.jumbotron h1 { letter-spacing:-8px; }
+.jumbo-gray { letter-spacing:-7px; }
+
+button.btn.delete, button.btn.edit, { width:80px; text-align:center;}
+
+.fa { font-size:200%; text-align:center; }
+
+.well {
+	margin-top:1em;
+}
+
+.required-input { background-color: #FFEEEE; }
