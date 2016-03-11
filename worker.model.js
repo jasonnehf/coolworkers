@@ -21,8 +21,8 @@ exports.create = function(newWorker, cb) {
 		if (err) return cb(err);
 		newWorker.id = uuid();
 		if(!newWorker.photourl)
-			newWorker.photourl="https://lh3.googleusercontent.com/-AWkW60F1zIQ/AAAAAAAAAAI/AAAAAAAAAAA/uRtDqWINhrs/s100/photo.jpg";
-		workers.push(newWorker); // modify
+			newWorker.photourl="https://i.imgur.com/QQClBbK.png";
+		workers.push(newWorker);
 		this.write(workers, function() {
 			cb(err, newWorker);
 		});

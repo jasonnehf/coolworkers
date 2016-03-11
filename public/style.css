@@ -1,19 +1,73 @@
-strike, .jumbo-gray {
-	color:#444;
-	font-size:100%;
+strike,
+.jumbo-gray {
+	color: #444;
+	font-size: 100%;
 }
+
 .jumbotron {
-	box-shadow:0px 2px 20px 20px #232123;
+	box-shadow: 0px 2px 20px 20px #232123;
 }
-.jumbotron h1 { letter-spacing:-8px; }
-.jumbo-gray { letter-spacing:-7px; }
 
-button.btn.delete, button.btn.edit, { width:80px; text-align:center;}
+.jumbotron h1 {
+	letter-spacing: -8px;
+}
 
-.fa { font-size:200%; text-align:center; }
+.jumbo-gray {
+	letter-spacing: -7px;
+}
+
+button.btn.delete,
+button.btn.edit,
+{
+	width: 80px;
+	text-align: center;
+}
+
+.fa {
+	font-size: 200%;
+	text-align: center;
+}
 
 .well {
-	margin-top:1em;
+	margin-top: 1em;
 }
 
-.required-input { background-color: #FFEEEE; }
+.required-input {
+	background-color: #FFEEEE;
+}
+
+.required-text { color:red; float:left;}
+
+.WTF {
+	color: #f35626;
+	background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-animation: hue 60s infinite linear;
+}
+
+.card {
+	box-shadow:10px 10px 25px 5px gray;
+	/*margin:0 1em 0 1em;*/
+	margin:1em;
+	padding:1em;
+	height:225px;
+	width:225px;
+	outline:1px #999 solid;
+
+}
+.container.well { padding-left:4.5em; }
+
+/*div, ul, li, h4, label, button { outline:black 1px solid; }*/
+
+/*.media:first-child { margin-top:inherit; }*/
+.card-block { margin-top:0px; padding-top:0px; }
+
+.card-img-top {
+	max-height:100px;
+	max-width:100px;
+	overflow-y:hidden;
+	display:inline-flex;
+}
+
+.card:hover { background-color:#f0f4f8; }

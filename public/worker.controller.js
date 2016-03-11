@@ -3,12 +3,24 @@
 var app = angular.module("workerApp");
 app.controller('workerCtrl', function($scope, WorkerFactory) {
 	WorkerFactory.fetch().then(function(res) {
-		console.log('res: ', res);
+		// console.log('res: ', res);
 		$scope.workers = res.data;
 	}, function(err) {
 		console.error('err: ', err);
 	});
+
+	$scope.validateInputs = function(incoming) {
+		if(incoming && incoming.fname && incoming.lname && incoming.position)
+			return true;
+		return false;
+	}
+
 	$scope.addWorker = function() {
+		if(!$scope.validateInputs($scope.newWorker))	{
+			$("input:invalid").effect( "shake", {times:2, distance:10,direction:"up"}, 166 );
+			return;
+		}
+
 		WorkerFactory.create($scope.newWorker).then(function(res) {
 			// console.log('res: ', res);
 			$('#new-worker-modal').modal('hide');
@@ -22,7 +34,13 @@ app.controller('workerCtrl', function($scope, WorkerFactory) {
 		WorkerFactory.remove(worker)
 		.then(function(worker) {
 			//success!
-			$scope.workers.splice($scope.workers.indexOf(worker), 1);
+			WorkerFactory.fetch().then(function(res) {
+				// console.log('res: ', res);
+				$scope.workers = res.data;
+			}, function(err) {
+				console.error('err: ', err);
+			});
+
 		}, function(err) {
 			console.error(err)
 		});
@@ -51,7 +69,11 @@ app.controller('workerCtrl', function($scope, WorkerFactory) {
 		});
 	}
 	$scope.confirmEdit = function() {
-
+		debugger;
+		if(!$scope.validateInputs($scope.workerEd))	{
+			$("input:invalid").effect( "shake", {times:2, distance:10,direction:"up"}, 166 );
+			return;
+		}
 		swal({
 			title: "Edit Worker?",
 			text: "Are you sure you want to edit this co-worker?",

@@ -4,13 +4,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Co(ol)-Workers</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./theme.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./sweetalert.css">
 	<link rel="stylesheet" href="./style.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
 	<script src="./sweetalert.min.js"></script>
 	<script src="./module.js"></script>
 	<script src="./worker.controller.js"></script>
@@ -23,11 +27,6 @@
 			<h1>Co<span class='jumbo-gray'>ol</span>Workers</h1> Remembering your co-workers' names, <strike>so you don't have to</strike> so you can too!
 		</div>
 	</div>
-	<!-- Button trigger modal -->
-	<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-		Launch demo modal
-	</button> -->
-	<!-- Modal -->
 	<div class="modal fade" id="edit-worker-modal" tabindex="-1" role="dialog" aria-labelledby="edit-worker-title">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -36,26 +35,27 @@
 					<h4 class="modal-title" id="edit-worker-title">Worker Details</h4>
 				</div>
 				<div class="modal-body">
-					<label class='control-label'>First Name *</label>
-					<input ng-class="!workerEd.fname.length>0 && 'required-input'" placeholder='Mitch' ng-model='workerEd.fname' class='input form-control'>
-					<label class='control-label'>Last Name *</label>
-					<input ng-class="!workerEd.lname.length>0 && 'required-input'"  placeholder='Connor' ng-model='workerEd.lname' class='input form-control'>
-					<label class='control-label'>Nickname</label>
-					<input placeholder='(optional)' ng-model='workerEd.nickname' class='form-control'>
-					<label class='control-label'>Position *</label>
-					<input ng-class="!workerEd.position.length>0 && 'required-input'"  placeholder='Con Artist' ng-model='workerEd.position' class='form-control'>
-					<label class='control-label'>Photo URL</label>
-					<input placeholder='http://i.imgur.com/V5Tix.jpg' ng-model='workerEd.photourl' class='form-control'>
+					<form id='editworker'>
+						<label class='control-label'>First Name *</label>
+						<input required ng-class="!workerEd.fname.length>0 && 'required-input'" placeholder='Mitch' ng-model='workerEd.fname' class='input form-control'>
+						<label class='control-label'>Last Name *</label>
+						<input required ng-class="!workerEd.lname.length>0 && 'required-input'" placeholder='Connor' ng-model='workerEd.lname' class='input form-control'>
+						<label class='control-label'>Nickname</label>
+						<input placeholder='(optional)' ng-model='workerEd.nickname' class='form-control'>
+						<label class='control-label'>Position *</label>
+						<input required ng-class="!workerEd.position.length>0 && 'required-input'" placeholder='Con Artist' ng-model='workerEd.position' class='form-control'>
+						<label class='control-label'>Photo URL</label>
+						<input placeholder='http://i.imgur.com/V5Tix.jpg' ng-model='workerEd.photourl' class='form-control'>
+					</form>
 				</div>
 				<div class="modal-footer">
-					<span>All fields marked with a (*) are required.</span>
+					<span class='required-text'>All fields marked with a (*) are required.</span>
 					<button type="button" class="btn btn-default" ng-click='cancelEditing()' data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-info" ng-click='confirmEdit()'>Save Changes</button>
+					<button form='editworker' type="button" class="btn btn-info" ng-click='confirmEdit()'>Save Changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="modal fade" id="new-worker-modal" tabindex="-1" role="dialog" aria-labelledby="new-worker-title">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -63,53 +63,42 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="new-worker-title">New Worker</h4>
 				</div>
-				<div class="modal-body">
-					<label class='control-label'>First Name *</label>
-					<input ng-class="!newWorker.fname.length>0 && 'required-input'" placeholder='Mitch' ng-model='newWorker.fname' class='input form-control'>
-					<label class='control-label'>Last Name *</label>
-					<input ng-class="!newWorker.lname.length>0 && 'required-input'"  placeholder='Connor' ng-model='newWorker.lname' class='input form-control'>
-					<label class='control-label'>Nickname</label>
-					<input placeholder='(optional)' ng-model='newWorker.nickname' class='form-control'>
-					<label class='control-label'>Position *</label>
-					<input ng-class="!newWorker.position.length>0 && 'required-input'"  placeholder='Con Artist' ng-model='newWorker.position' class='form-control'>
-					<label class='control-label'>Photo URL</label>
-					<input placeholder='http://i.imgur.com/V5Tix.jpg' ng-model='newWorker.photourl' class='form-control'>
-				</div>
+				<form id="newworkerform">
+					<div class="modal-body">
+						<label class='control-label'>First Name *</label>
+						<input required ng-class="!newWorker.fname.length>0 && 'required-input'" placeholder='Mitch' ng-model='newWorker.fname' class='input form-control'>
+						<label class='control-label'>Last Name *</label>
+						<input required ng-class="!newWorker.lname.length>0 && 'required-input'" placeholder='Connor' ng-model='newWorker.lname' class='input form-control'>
+						<label class='control-label'>Nickname</label>
+						<input placeholder='(optional)' ng-model='newWorker.nickname' class='form-control'>
+						<label class='control-label'>Position *</label>
+						<input required ng-class="!newWorker.position.length>0 && 'required-input'" placeholder='Con Artist' ng-model='newWorker.position' class='form-control'>
+						<label class='control-label'>Photo URL</label>
+						<input placeholder='http://i.imgur.com/V5Tix.jpg' ng-model='newWorker.photourl' class='form-control'>
+					</div>
+				</form>
 				<div class="modal-footer">
-					<span>All fields marked with a (*) are required.</span>
+					<span class='required-text'>All fields marked with a (*) are required.</span>
 					<button type="button" class="btn btn-default" ng-click='cancelEditing()' data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-info" ng-click='addWorker()'>Add Worker</button>
+					<button form='newworkerform' type="button" class="btn btn-info" ng-click='addWorker()'>Add Worker</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
 	<div class='container'>
-	<button class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#new-worker-modal'><i class="fa fa-plus-circle"></i></button>
-	<label class="">Add New Employee</label>
-
-	<div class="container well">
-		<ul class="media-list" ng-repeat="worker in workers track by $index">
-			<li class="media col-xs-12 col-md-3">
-				<div class="media-left">
-					<img class="media-object" width=80 ng-src="{{worker.photourl}}">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">{{worker.fname}} {{worker.lname}}</h4>
-
-					<div class='' ng-show="worker.nickname"> a.k.a., "{{worker.nickname}}"</div>
+		<button class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#new-worker-modal'><i class="fa fa-plus-circle"></i></button>
+		<label class="">Add New Employee</label>
+		<div class="container well">
+			<div class="card col-xs-12 col-sm-6 col-md-3" ng-repeat="worker in workers track by $index">
+				<img width=100 class="card-img-top" ng-src="{{worker.photourl}}">
+				<div class="card-block">
+					<h4 class="card-title">{{worker.fname}} {{worker.lname}}</h4>
+					<div ng-show='worker.nickname' class="card-text">a.k.a., "{{worker.nickname}}"</div>
 					<button ng-click='editWorker(worker)' class='btn btn-sm btn-info edit' data-toggle='modal' data-target='#edit-worker-modal'><i class="fa fa-info-circle"></i></button>
 					<button class='btn btn-sm btn-danger delete' ng-click='confirmDelete(worker)'><i class="fa fa-trash"></i></button>
-					</div>
-
-			</li>
-		</ul>
-	</div>
-
-
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+				</div>
+			</div>
+		</div>
 </body>
 
 </html>
