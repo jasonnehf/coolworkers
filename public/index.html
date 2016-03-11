@@ -36,18 +36,19 @@
 					<h4 class="modal-title" id="edit-worker-title">Worker Details</h4>
 				</div>
 				<div class="modal-body">
-					<label class='control-label'>First Name</label>
-					<input ng-model='workerEd.fname' class='input form-control'>
-					<label class='control-label'>Last Name</label>
-					<input ng-model='workerEd.lname' class='input form-control'>
+					<label class='control-label'>First Name *</label>
+					<input ng-class="!workerEd.fname.length>0 && 'required-input'" placeholder='Mitch' ng-model='workerEd.fname' class='input form-control'>
+					<label class='control-label'>Last Name *</label>
+					<input ng-class="!workerEd.lname.length>0 && 'required-input'"  placeholder='Connor' ng-model='workerEd.lname' class='input form-control'>
 					<label class='control-label'>Nickname</label>
-					<input ng-model='workerEd.nickname' class='form-control'>
-					<label class='control-label'>Position</label>
-					<input ng-model='workerEd.position' class='form-control'>
+					<input placeholder='(optional)' ng-model='workerEd.nickname' class='form-control'>
+					<label class='control-label'>Position *</label>
+					<input ng-class="!workerEd.position.length>0 && 'required-input'"  placeholder='Private Detective' ng-model='workerEd.position' class='form-control'>
 					<label class='control-label'>Photo URL</label>
-					<input ng-model='workerEd.photourl' class='form-control'>
+					<input placeholder='http://i.imgur.com/V5Tix.jpg' ng-model='workerEd.photourl' class='form-control'>
 				</div>
 				<div class="modal-footer">
+					<span>All fields marked with a (*) are required.</span>
 					<button type="button" class="btn btn-default" ng-click='cancelEditing()' data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-info" ng-click='confirmEdit()'>Save Changes</button>
 				</div>
