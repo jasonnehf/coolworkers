@@ -69,7 +69,7 @@ app.controller('workerCtrl', function($scope, WorkerFactory) {
 		});
 	}
 	$scope.confirmEdit = function() {
-		debugger;
+		//debugger;
 		if(!$scope.validateInputs($scope.workerEd))	{
 			$("input:invalid").effect( "shake", {times:2, distance:10,direction:"up"}, 166 );
 			return;
