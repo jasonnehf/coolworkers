@@ -22,6 +22,7 @@ exports.create = function(newWorker, cb) {
 		newWorker.id = uuid();
 		if(!newWorker.photourl)
 			newWorker.photourl="https://i.imgur.com/QQClBbK.png";
+		newWorker.photourl=newWorker.photourl.replace("http://","https://")
 		workers.push(newWorker);
 		this.write(workers, function() {
 			cb(err, newWorker);
